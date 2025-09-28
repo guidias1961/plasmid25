@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plasmid 25 | Plasma Viral Crypto</title>
+  <meta name="description" content="Plasmid 25. Plasma is the new viral crypto. Launch via DYOR Swap." />
+  <meta name="theme-color" content="#00ffe7" />
+  <link rel="icon" href="logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+  <meta property="og:title" content="Plasmid 25" />
+  <meta property="og:description" content="Plasma is the new viral crypto. Launch via DYOR Swap." />
+  <meta property="og:image" content="logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0a0f1f;
+      --panel:#0f1430;
+      --text:#e5faff;
+      --muted:#9fe0ff;
+      --primary:#00ffe7;
+      --accent:#ff2a6d;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family:'Share Tech Mono', monospace;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    /* background canvas */
+    canvas#virus-bg{
+      position:fixed;inset:0;z-index:-1;width:100%;height:100%;
+    }
+
+    /* top nav */
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:10;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:12px 18px;background:linear-gradient(180deg, rgba(10,15,31,.9), rgba(10,15,31,.4));
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(0,255,231,.15);
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;
+      color:var(--primary);
+    }
+    .brand img{
+      width:28px;height:28px;object-fit:contain;filter: drop-shadow(0 0 8px rgba(0,255,231,.6));
+    }
+    .brand span{
+      font-size:1.05rem;letter-spacing:.5px;text-shadow:0 0 10px var(--primary)
+    }
+    .nav a{
+      color:var(--muted);text-decoration:none;margin-left:16px;font-size:.95rem;transition:.25s;
+    }
+    .nav a:hover{color:var(--primary);text-shadow:0 0 8px var(--primary)}
+    .spacer{height:60px}
+
+    /* sections */
+    section{padding:72px 20px}
+    .wrap{max-width:1100px;margin:0 auto}
+
+    /* hero */
+    .hero{
+      display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;
+      padding-top:84px;padding-bottom:84px;
+    }
+    .hero-logo{
+      width:88px;height:88px;object-fit:contain;margin-bottom:4px;
+      filter: drop-shadow(0 0 16px rgba(0,255,231,.55));
+    }
+    h1{
+      font-size:3.3rem;color:var(--primary);
+      text-shadow:0 0 10px var(--primary),0 0 22px var(--accent);
+      animation:glitch 2s infinite;
+    }
+    @keyframes glitch{
+      0%{text-shadow:2px 0 var(--accent), -2px 0 var(--primary)}
+      25%{text-shadow:-2px 0 var(--accent), 2px 0 var(--primary)}
+      50%{text-shadow:3px 2px var(--accent), -3px -2px var(--primary)}
+      75%{text-shadow:-2px -1px var(--accent), 2px 1px var(--primary)}
+      100%{text-shadow:0 0 10px var(--primary),0 0 22px var(--accent)}
+    }
+    .tagline{
+      font-size:1.1rem;color:var(--text);opacity:.92;border-right:2px solid var(--primary);
+      white-space:nowrap;overflow:hidden;width:28ch;
+      animation:typing 4s steps(28) infinite alternate, blink .7s infinite;
+    }
+    @keyframes typing{from{width:0}to{width:28ch}}
+    @keyframes blink{50%{border-color:transparent}}
+
+    .buttons{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+    .btn{
+      padding:12px 22px;border:2px solid var(--primary);border-radius:8px;color:var(--primary);
+      text-decoration:none;transition:.25s;box-shadow:0 0 15px rgba(0,255,231,.25)
+    }
+    .btn:hover{background:var(--primary);color:var(--bg);box-shadow:0 0 25px var(--primary)}
+    .btn.alt{border-color:var(--accent);color:var(--accent)}
+    .btn.alt:hover{background:var(--accent);color:#0b0f1f;box-shadow:0 0 25px var(--accent)}
+
+    /* concept cards */
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:22px}
+    .card{
+      background:linear-gradient(180deg, rgba(15,20,48,.75), rgba(15,20,48,.35));
+      border:1px solid rgba(0,255,231,.15);border-radius:14px;padding:18px;
+      box-shadow:inset 0 0 0 1px rgba(0,255,231,.05);
+    }
+    .card h3{color:var(--primary);margin-bottom:8px;font-size:1.1rem}
+    .card p{color:var(--muted);font-size:.98rem;line-height:1.45}
+
+    /* section titles */
+    .stitle{font-size:1.6rem;color:var(--primary);margin-bottom:14px;text-shadow:0 0 12px rgba(0,255,231,.6)}
+
+    /* why plasma */
+    .grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+    @media (max-width:900px){.grid2{grid-template-columns:1fr}}
+    .panel{border:1px solid rgba(0,255,231,.18);border-radius:12px;padding:18px;background:rgba(15,20,48,.45)}
+    .list li{margin-left:18px;color:var(--muted);line-height:1.5}
+
+    /* faq */
+    details{border:1px solid rgba(0,255,231,.2);border-radius:10px;padding:12px;background:rgba(15,20,48,.45)}
+    details+details{margin-top:10px}
+    summary{cursor:pointer;color:var(--primary)}
+    details p{margin-top:8px;color:var(--muted)}
+
+    /* footer */
+    footer{padding:28px 20px;border-top:1px solid rgba(0,255,231,.15);background:rgba(10,15,31,.6)}
+    .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+    .ca{padding:8px 12px;border:1px dashed rgba(0,255,231,.3);border-radius:8px}
+    .copy{cursor:pointer;padding:8px 12px;border:2px solid var(--primary);border-radius:8px;background:transparent;color:var(--primary)}
+    .copy:hover{background:var(--primary);color:var(--bg)}
+  </style>
+</head>
+<body>
+  <!-- background -->
+  <canvas id="virus-bg" aria-hidden="true"></canvas>
+
+  <!-- nav -->
+  <nav class="nav">
+    <div class="brand">
+      <img src="logo.png" alt="Plasmid 25 logo" />
+      <span>PLASMID 25</span>
+    </div>
+    <div>
+      <a href="#concept">Concept</a>
+      <a href="#plasma">Why Plasma</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </nav>
+  <div class="spacer"></div>
+
+  <!-- hero -->
+  <section class="hero">
+    <div class="wrap">
+      <img class="hero-logo" src="logo.png" alt="Plasmid 25 emblem" />
+      <h1>Plasmid 25</h1>
+      <p class="tagline">Plasma is the new viral crypto...</p>
+      <div class="buttons">
+        <a id="buyTop" href="#" class="btn">Buy on DYOR Swap</a>
+        <a id="twitter" href="https://twitter.com" target="_blank" rel="noopener" class="btn">Twitter</a>
+        <a id="telegram" href="https://t.me" target="_blank" rel="noopener" class="btn alt">Telegram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- concept -->
+  <section id="concept">
+    <div class="wrap">
+      <h2 class="stitle">Concept</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Memetic Vector</h3>
+          <p>Direct visuals and simple language designed to spread fast across feeds and chats.</p>
+        </div>
+        <div class="card">
+          <h3>Contagion Loops</h3>
+          <p>Short posts, viral art, and clear calls to action. See it, click it, share it.</p>
+        </div>
+        <div class="card">
+          <h3>Low Friction</h3>
+          <p>Single buy path via DYOR Swap. No extra pages or noise to slow the flow.</p>
+        </div>
+        <div class="card">
+          <h3>Community Raids</h3>
+          <p>Simple coordination with pinned CTAs. Keep cadence, keep pressure, keep moving.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- why plasma -->
+  <section id="plasma">
+    <div class="wrap">
+      <h2 class="stitle">Why Plasma</h2>
+      <div class="grid2">
+        <div class="panel">
+          <p style="color:var(--muted)">
+            Strategic network choice for straightforward swap experiences and clear messaging. Keep the funnel short and the signal strong.
+          </p>
+          <ul class="list" style="margin-top:10px">
+            <li>Narrative of Plasma as a crypto culture vector</li>
+            <li>Direct access via DYOR Swap</li>
+            <li>Clarity first and repeated messaging</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <p style="color:var(--muted)">Site Objective</p>
+          <ul class="list" style="margin-top:10px">
+            <li>Deliver a fast call to action</li>
+            <li>Avoid information overload</li>
+            <li>Maintain a viral visual identity</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- faq -->
+  <section id="faq">
+    <div class="wrap">
+      <h2 class="stitle">FAQ</h2>
+      <details>
+        <summary>What is the contract address</summary>
+        <p>Once public, the contract field below will be updated. Use the Copy button for accuracy.</p>
+      </details>
+      <details>
+        <summary>Where do I buy</summary>
+        <p>Use the Buy button which routes to DYOR Swap with the token preloaded.</p>
+      </details>
+      <details>
+        <summary>Is there a roadmap</summary>
+        <p>Focus is on launch execution and content cadence. The site will be updated as needed.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer>
+    <div class="wrap">
+      <div class="row" style="margin-bottom:10px">
+        <div class="ca">Contract: <span id="caText">0x0000000000000000000000000000000000000000</span></div>
+        <button class="copy" id="copyBtn">Copy</button>
+      </div>
+      <div style="color:var(--muted);font-size:.95rem">Official links at the top. Only buy through the Buy button.</div>
+    </div>
+  </footer>
+
+  <script>
+    /* links and contract */
+    const BUY_URL = "#";                   /* replace with your DYOR Swap direct link */
+    const TWITTER_URL = "https://twitter.com";  /* replace */
+    const TELEGRAM_URL = "https://t.me";        /* replace */
+    const CONTRACT = "0x0000000000000000000000000000000000000000"; /* replace */
+
+    document.getElementById("buyTop").href = BUY_URL;
+    document.getElementById("twitter").href = TWITTER_URL;
+    document.getElementById("telegram").href = TELEGRAM_URL;
+    document.getElementById("caText").textContent = CONTRACT;
+
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(CONTRACT);
+        document.getElementById("copyBtn").textContent = "Copied";
+        setTimeout(()=>document.getElementById("copyBtn").textContent="Copy",1200);
+      }catch(e){ alert("Copy failed"); }
+    });
+
+    /* sprite particles using logo.png */
+    const canvas = document.getElementById('virus-bg');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let particles = [];
+    let w, h;
+    let sprite = new Image();
+    sprite.src = 'logo.png';
+
+    function resizeCanvas(){
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', () => { resizeCanvas(); init(); });
+    resizeCanvas();
+
+    class Particle{
+      constructor(){ this.reset(true); }
+      reset(far=false){
+        this.x = Math.random()*w;
+        this.y = Math.random()*h;
+        this.z = (far ? w : Math.random()*w) + Math.random()*200;
+        this.speed = 3.0 + Math.random()*2.0;
+        this.spin = (Math.random()*0.02 - 0.01); /* slight rotation */
+        this.rot = Math.random()*Math.PI*2;
+        this.jx = (Math.random()-0.5)*0.4;      /* tiny drift */
+        this.jy = (Math.random()-0.5)*0.4;
+        this.base = 10; /* base sprite size in px before perspective scaling */
+      }
+      update(){
+        this.z -= this.speed;
+        this.x += this.jx;
+        this.y += this.jy;
+        this.rot += this.spin;
+        if(this.z <= 0){ this.reset(true); }
+      }
+      draw(){
+        const scale = 320/this.z;
+        const x = (this.x - w/2)*scale + w/2;
+        const y = (this.y - h/2)*scale + h/2;
+        const size = Math.max(1, this.base*scale); /* super small when far, larger near */
+        if(size < 0.5) return;
+
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(this.rot);
+        ctx.imageSmoothingEnabled = true;
+        ctx.globalAlpha = Math.min(1, 0.25 + scale*1.2); /* gentle depth fade */
+        ctx.drawImage(sprite, -size/2, -size/2, size, size);
+        ctx.restore();
+
+        /* soft halo */
+        ctx.beginPath();
+        ctx.arc(x, y, size*0.7, 0, Math.PI*2);
+        ctx.strokeStyle = `rgba(0,255,231,${Math.min(0.25, scale*0.6)})`;
+        ctx.lineWidth = Math.max(0.4, size*0.06);
+        ctx.stroke();
+      }
+    }
+
+    function init(){
+      particles = [];
+      const count = Math.min(550, Math.floor(w*h/2600));
+      for(let i=0;i<count;i++) particles.push(new Particle());
+    }
+
+    function animate(){
+      ctx.fillStyle = "rgba(10,15,31,0.35)";
+      ctx.fillRect(0,0,w,h);
+      for(const p of particles){ p.update(); p.draw(); }
+      requestAnimationFrame(animate);
+    }
+
+    function start(){
+      init();
+      animate();
+    }
+
+    /* start after sprite loads; fallback to circles if it fails */
+    sprite.onload = start;
+    sprite.onerror = () => {
+      console.warn('logo.png not found, falling back to circles');
+      Particle.prototype.draw = function(){
+        const scale = 320/this.z;
+        const x = (this.x - w/2)*scale + w/2;
+        const y = (this.y - h/2)*scale + h/2;
+        const r = Math.max(1, 3.5*scale);
+        const g = ctx.createRadialGradient(x,y,0,x,y,r);
+        g.addColorStop(0,'rgba(0,255,231,0.95)');
+        g.addColorStop(1,'rgba(0,255,231,0.0)');
+        ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2);
+        ctx.fillStyle = g; ctx.fill();
+      };
+      start();
+    };
+  </script>
+</body>
+</html>
+
